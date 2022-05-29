@@ -8,7 +8,7 @@ const baseUrl = 'https://image.tmdb.org/t/p/original/';
 
 function Row({ title, fetchUrl, isLargeRow }) {
 	const [movies, setMovies] = useState([]);
-	const [trailerUrl, setTrailerUrl] = useState('');
+	const [trailerUrl, setTrailerUrl] = useState(null);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -27,9 +27,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
 	}
 
 	const handleClick = (movie) => {
-		console.log("url", movie);
 		if (trailerUrl) {
-			setTrailerUrl('');
+			setTrailerUrl(null);
 		} else {
 			movieTrailer(null, { tmdbId: movie?.id })
 				.then((url) => {
@@ -39,7 +38,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
 				.catch((err) => console.log(err));
 		}
 	}
-	console.log("movies", movies);
 
 	return (
 		<div className="row">
